@@ -23,12 +23,9 @@ public class Image {
     private String path;
     private String contentType;
 
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "house_id", insertable = false, updatable = false)
     private House house;
-
-
 
     private LocalDateTime createdAt;
     private LocalDateTime deletedAt;

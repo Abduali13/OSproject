@@ -22,11 +22,8 @@ public class Rent {
     private LocalDate endDate;
     private boolean active;
 
-    @Column(name = "house_id")
-    private Integer houseId;
-
     @OneToMany(mappedBy = "rent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<House> house;
+    private List<House> houses;
 
 
 }

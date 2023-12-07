@@ -5,10 +5,8 @@ import com.company.osproject.entity.enums.Status;
 import com.company.osproject.entity.enums.Types;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import jdk.jfr.Registered;
 import lombok.*;
 
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -39,11 +37,11 @@ public class House {
 
 
 
-//    @Enumerated(EnumType.STRING)
-//    private Types types;
-//
-//    @Enumerated(EnumType.STRING)
-//    private Status status;
+    @Enumerated(EnumType.STRING)
+    private Types types;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     private String additionalInfo;
     private Long price;
@@ -62,6 +60,10 @@ public class House {
 
     @OneToMany(mappedBy = "house",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Image> images;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    private List<Customer> customers;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

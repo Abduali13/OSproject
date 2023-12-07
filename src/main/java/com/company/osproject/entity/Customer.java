@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,6 +33,8 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private CustomerRoles customerRoles;
 
+    @ManyToMany(mappedBy = "customers", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<House> house;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

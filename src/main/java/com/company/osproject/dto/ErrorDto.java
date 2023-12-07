@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 public class ErrorDto {
 
+    private String field;
     private String message;
-    private String rejectedValue;
 }
 

@@ -25,7 +25,7 @@ public class Sale {
     private Long price;
 
     @OneToMany(mappedBy = "sale", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<House> house;
+    private List<House> houses;
 
 
 

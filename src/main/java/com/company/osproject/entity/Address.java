@@ -31,7 +31,6 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private House house;
 
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
