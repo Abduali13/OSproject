@@ -22,7 +22,6 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer addressId;
     private Integer addressNumber;
-    private String buildingName;
     private String zipcode;
     private String street;
     private String district;

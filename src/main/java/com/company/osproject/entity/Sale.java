@@ -23,9 +23,10 @@ public class Sale {
 
     private LocalDate soldDate;
     private Long price;
+    private boolean available;
 
-    @OneToMany(mappedBy = "sale", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<House> houses;
+    @OneToOne(mappedBy = "sale", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private House house;
 
 
 

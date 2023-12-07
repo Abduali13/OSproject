@@ -25,17 +25,19 @@ public class House {
     @Column(name = "house_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer houseId;
+    private String nameOfBuilding;
     private Integer numberOfHouse;
     private Integer numberOfRooms;
-    private Integer numberOfFlats;
+    private Integer numberOfFlat;
     private Integer numberOfBedrooms;
     private Integer numberOfKitchens;
     private Integer numberOfBathrooms;
     private Integer numberOfGarages;
     private Integer numberOfParkingSlots;
     private Float size;
-
-
+    private Long price;
+    private String additionalInfo;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private Types types;
@@ -43,18 +45,16 @@ public class House {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private String additionalInfo;
-    private Long price;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "house_id")
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "house_id", insertable = false, updatable = false)
     private Address address;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sale_id", insertable = false, updatable = false)
     private Sale sale;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "rent_id", insertable = false, updatable = false)
     private Rent rent;
 
