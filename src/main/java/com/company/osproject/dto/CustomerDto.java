@@ -1,4 +1,4 @@
-package com.company.osproject.entity;
+package com.company.osproject.dto;
 
 import com.company.osproject.entity.enums.CustomerRoles;
 import jakarta.persistence.*;
@@ -9,16 +9,11 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "customers")
-public class Customer {
+public class CustomerDto {
 
-    @Id
-    @Column(name = "customer_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
     private String firstName;
     private String lastName;
@@ -27,14 +22,12 @@ public class Customer {
     private Integer age;
     private String username;
     private String password;
-
     private boolean active;
 
     @Enumerated(EnumType.STRING)
     private CustomerRoles customerRoles;
 
-    @ManyToMany(mappedBy = "customers", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<House> houses;
+    private List<HouseDto> houses;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

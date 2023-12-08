@@ -14,8 +14,6 @@ import java.util.List;
 @Setter
 @Entity
 @Builder
-@Transactional
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "houses")

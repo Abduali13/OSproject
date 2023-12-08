@@ -29,6 +29,4 @@ public class Sale {
     private House house;
 
 
-
-
 }

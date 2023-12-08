@@ -9,13 +9,17 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class ImageDto {
 
-    private Integer userId;
-    private String username;
-    private String password;
+    private Integer imageId;
+    private String imageName;
+    private String ext;
+    private String path;
+    private String contentType;
+    private byte[] content;
+
+    private HouseDto house;
 
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 }
