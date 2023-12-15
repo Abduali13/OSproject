@@ -3,6 +3,7 @@ package com.company.osproject.service;
 import com.company.osproject.dto.HouseDto;
 import com.company.osproject.dto.ResponseDto;
 import com.company.osproject.entity.House;
+import com.company.osproject.entity.enums.Status;
 import com.company.osproject.entity.enums.Types;
 import com.company.osproject.repository.HouseRepository;
 import com.company.osproject.service.mapper.HouseMapper;
@@ -159,15 +160,11 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
         return null;
     }
 
-    public ResponseDto<HouseDto> getAllHousesByParam(){
-        return null;
-    }
-
-    public ResponseDto<Page<HouseDto>> getHousesWithParams(Map<String, String> params) {
+    public ResponseDto<Page<HouseDto>> getHousesWithParams(Map<String, String> params, Types types, Status status) {
         int size = 10, page = 0;
-        if (params.containsKey("size")){
-            size = Integer.parseInt(params.get("size"));
-        }
+//        if (params.containsKey("size")){
+//            size = Integer.parseInt(params.get("size"));
+//        }
         if (params.containsKey("page")){
             page = Integer.parseInt(params.get("page"));
         }
@@ -190,6 +187,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
                                 params.get("price") == null ? null : Long.parseLong(params.get("price")),
                                 params.get("additionalInfo"),
                                 params.get("description"),
+                                types, status,
                                 PageRequest.of(page, size)
                         ).map(this.houseMapper::toDto)
                 )

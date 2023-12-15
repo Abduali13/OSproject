@@ -37,10 +37,10 @@ public class House {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private Types types;
+    public Types types;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    public Status status;
 
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)

@@ -1,6 +1,9 @@
 package com.company.osproject.repository;
 
+import com.company.osproject.entity.Address;
 import com.company.osproject.entity.House;
+import com.company.osproject.entity.Rent;
+import com.company.osproject.entity.Sale;
 import com.company.osproject.entity.enums.Status;
 import com.company.osproject.entity.enums.Types;
 import org.springframework.data.domain.Page;
@@ -52,7 +55,9 @@ public interface HouseRepository extends JpaRepository<House, Integer> {
                     " and h.size = coalesce(:size, h.size) " +
                     " and h.price = coalesce(:price, h.price) " +
                     " and h.additionalInfo = coalesce(:additionalInfo, h.additionalInfo) " +
-                    " and h.description = coalesce(:description, h.description) ",
+                    " and h.description = coalesce(:description, h.description) " +
+                    " and h.types = coalesce(:types, h.types) " +
+                    " and h.status = coalesce(:status, h.status) ",
             countQuery = "select count(*) from House as h where h.houseId = coalesce(:houseId, h.houseId) " +
                     " and h.nameOfBuilding = coalesce(:nameOfBuilding, h.nameOfBuilding) " +
                     " and h.numberOfHouse = coalesce(:numberOfHouse, h.numberOfHouse) " +
@@ -66,7 +71,9 @@ public interface HouseRepository extends JpaRepository<House, Integer> {
                     " and h.size = coalesce(:size, h.size) " +
                     " and h.price = coalesce(:price, h.price) " +
                     " and h.additionalInfo = coalesce(:additionalInfo, h.additionalInfo) " +
-                    " and h.description = coalesce(:description, h.description) ")
+                    " and h.description = coalesce(:description, h.description) " +
+                    " and h.types = coalesce(:types, h.types) " +
+                    " and h.status = coalesce(:status, h.status) ")
     Page<House> getAllHouseWithMoreParams(
             @Param(value = "houseId") Integer houseId,
             @Param(value = "nameOfBuilding") String nameOfBuilding,
@@ -82,6 +89,8 @@ public interface HouseRepository extends JpaRepository<House, Integer> {
             @Param(value = "price") Long price,
             @Param(value = "additionalInfo") String additionalInfo,
             @Param(value = "description") String description,
+            @Param(value = "types") Types types,
+            @Param(value = "status") Status status,
             Pageable pageable
     );
 
