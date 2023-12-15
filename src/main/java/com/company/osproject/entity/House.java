@@ -4,7 +4,6 @@ package com.company.osproject.entity;
 import com.company.osproject.entity.enums.Status;
 import com.company.osproject.entity.enums.Types;
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -26,7 +25,7 @@ public class House {
     private String nameOfBuilding;
     private Integer numberOfHouse;
     private Integer numberOfRooms;
-    private Integer numberOfFlat;
+    private Integer numberOfFloor;
     private Integer numberOfBedrooms;
     private Integer numberOfKitchens;
     private Integer numberOfBathrooms;

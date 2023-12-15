@@ -27,8 +27,8 @@ public class HouseDto {
     @NotNull(message = "Number of rooms at house cannot be null or empty")
     private Integer numberOfRooms;
 
-    @NotNull(message = "Numbers of flat cannot be null or empty")
-    private Integer numberOfFlat;
+    @NotNull(message = "Numbers of floor cannot be null or empty")
+    private Integer numberOfFloor;
 
     @NotNull(message = "Number of bedrooms cannot be null or empty")
     private Integer numberOfBedrooms;
