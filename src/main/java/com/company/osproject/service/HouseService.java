@@ -29,14 +29,13 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
     @Override
     public ResponseDto<HouseDto> createEntity(HouseDto dto) {
         try {
-            House entity = this.houseMapper.toEntity(dto);
-            entity.setCreatedAt(LocalDateTime.now());
             return ResponseDto.<HouseDto>builder()
                     .success(true)
                     .message("OK")
                     .content(
                             this.houseMapper.toDto(
-                                    this.houseRepository.save(entity)
+                                    this.houseRepository.save(
+                                            this.houseMapper.toEntity(dto))
                             )
                     )
                     .build();
@@ -51,12 +50,11 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
     @Override
     public ResponseDto<HouseDto> getEntity(Integer entityId) {
         return this.houseRepository.findAllByHouseIdAndDeletedAtIsNull(entityId)
-                .map(house ->
-                        ResponseDto.<HouseDto>builder()
-                                .success(true)
-                                .message("OK")
-                                .content(this.houseMapper.toDto(house))
-                                .build())
+                .map(house -> ResponseDto.<HouseDto>builder()
+                        .success(true)
+                        .message("OK")
+                        .content(this.houseMapper.toDto(house))
+                        .build())
                 .orElse(ResponseDto.<HouseDto>builder()
                         .code(-1)
                         .message(String.format("House with this %d cannot be found", entityId))
@@ -66,20 +64,18 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
     @Override
     public ResponseDto<HouseDto> updateEntity(Integer entityId, HouseDto dto) {
         return this.houseRepository.findAllByHouseIdAndDeletedAtIsNull(entityId)
-                .map(house -> {
-                    house.setUpdatedAt(LocalDateTime.now());
-                    return ResponseDto.<HouseDto>builder()
-                            .success(true)
-                            .message("OK")
-                            .content(
-                                    this.houseMapper.toDto(
-                                            this.houseRepository.save(
-                                                    this.houseMapper.updateHouse(house, dto)
-                                            )
-                                    )
-                            )
-                            .build();
-                }).orElse(ResponseDto.<HouseDto>builder()
+                .map(house -> ResponseDto.<HouseDto>builder()
+                        .success(true)
+                        .message("OK")
+                        .content(
+                                this.houseMapper.toDto(
+                                        this.houseRepository.save(
+                                                this.houseMapper.updateHouse(house, dto)
+                                        )
+                                )
+                        )
+                        .build())
+                .orElse(ResponseDto.<HouseDto>builder()
                         .code(-1)
                         .message(String.format("House with this %d cannot be found", entityId))
                         .build());
@@ -105,7 +101,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
                         .build());
     }
 
-    public ResponseDto<HouseDto> getAllApartments(){
+    public ResponseDto<HouseDto> getAllApartments() {
         return this.houseRepository.findAllByDeletedAtIsNull()
                 .map(house -> ResponseDto.<HouseDto>builder()
                         .success(true)
@@ -120,7 +116,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
                         .build());
     }
 
-    public ResponseDto<HouseDto> getAllFlats(){
+    public ResponseDto<HouseDto> getAllFlats() {
         return this.houseRepository.findAllByTypes(Types.FLAT)
                 .map(flat -> ResponseDto.<HouseDto>builder()
                         .success(true)
@@ -136,7 +132,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
 
     }
 
-    public ResponseDto<HouseDto> getAllHouses(){
+    public ResponseDto<HouseDto> getAllHouses() {
         return this.houseRepository.findAllByTypes(Types.HOUSE)
                 .map(house -> ResponseDto.<HouseDto>builder()
                         .success(true)
@@ -152,11 +148,11 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
 
     }
 
-    public ResponseDto<HouseDto> getAllHousesForRent(){
+    public ResponseDto<HouseDto> getAllHousesForRent() {
         return null;
     }
 
-    public ResponseDto<HouseDto> getAllHousesForSale(){
+    public ResponseDto<HouseDto> getAllHousesForSale() {
         return null;
     }
 
@@ -165,7 +161,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
 //        if (params.containsKey("size")){
 //            size = Integer.parseInt(params.get("size"));
 //        }
-        if (params.containsKey("page")){
+        if (params.containsKey("page")) {
             page = Integer.parseInt(params.get("page"));
         }
         return ResponseDto.<Page<HouseDto>>builder()
@@ -183,7 +179,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
                                 params.get("numberOfBathrooms") == null ? null : Integer.parseInt(params.get("numberOfBathrooms")),
                                 params.get("numberOfGarages") == null ? null : Integer.parseInt(params.get("numberOfGarages")),
                                 params.get("numberOfParkingSlots") == null ? null : Integer.parseInt(params.get("numberOfParkingSlots")),
-                                params.get("size") == null  ? null : Float.parseFloat( params.get("size")),
+                                params.get("size") == null ? null : Float.parseFloat(params.get("size")),
                                 params.get("price") == null ? null : Long.parseLong(params.get("price")),
                                 params.get("additionalInfo"),
                                 params.get("description"),

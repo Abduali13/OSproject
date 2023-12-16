@@ -1,6 +1,7 @@
 package com.company.osproject.dto;
 
 import com.company.osproject.entity.enums.CustomerRoles;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +15,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerDto {
 
     private Integer customerId;
