@@ -19,6 +19,7 @@ public abstract class CustomerMapper {
     @Mapping(target = "active", expression = "java(true)")
     public abstract Customer toEntity(CustomerDto dto);
 
+    @Mapping(target = "houses", ignore = true)
     public abstract CustomerDto toDto(Customer customer);
 
     @Mapping(target = "customerId", ignore = true)

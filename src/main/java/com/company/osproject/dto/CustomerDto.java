@@ -21,10 +21,10 @@ public class CustomerDto {
     private Integer customerId;
 
     @NotBlank(message = "First name cannot be null or empty")
-    private String firstName;
+    private String firstname;
 
     @NotBlank(message = "Last name cannot be null or empty")
-    private String lastName;
+    private String lastname;
 
     @NotBlank(message = "Email cannot be null or empty")
     private String email;
