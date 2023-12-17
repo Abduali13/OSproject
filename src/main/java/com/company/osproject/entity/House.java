@@ -42,9 +42,23 @@ public class House {
     @Enumerated(EnumType.STRING)
     public Status status;
 
+//    @Column(name = "address_id")
+//    private Integer addressId;
+//
+//    @Column(name = "sale_id")
+//    private Integer saleId;
+//
+//    @Column(name = "rent_id")
+//    private Integer rentId;
+//
+//    @Column(name = "image_id")
+//    private Integer imageId;
+//
+//    @Column(name = "customer_id")
+//    private Integer customerId;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "house_id", insertable = false, updatable = false)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @JoinColumn(name = "address_id", insertable = false, updatable = false)
     private Address address;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

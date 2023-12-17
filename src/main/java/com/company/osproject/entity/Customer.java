@@ -20,8 +20,8 @@ public class Customer {
     @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private String email;
     private String phoneNumber;
     private Integer age;
@@ -32,6 +32,9 @@ public class Customer {
 
     @Enumerated(EnumType.STRING)
     private CustomerRoles customerRoles;
+
+//    @Column(name = "house_id")
+//    private Integer houseId;
 
     @ManyToMany(mappedBy = "customers", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<House> houses;

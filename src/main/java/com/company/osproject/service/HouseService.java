@@ -2,7 +2,6 @@ package com.company.osproject.service;
 
 import com.company.osproject.dto.HouseDto;
 import com.company.osproject.dto.ResponseDto;
-import com.company.osproject.entity.House;
 import com.company.osproject.entity.enums.Status;
 import com.company.osproject.entity.enums.Types;
 import com.company.osproject.repository.HouseRepository;
@@ -11,10 +10,8 @@ import com.company.osproject.util.SimpleCrud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -42,7 +39,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
         } catch (Exception e) {
             return ResponseDto.<HouseDto>builder()
                     .code(-2)
-                    .message("Error occurred while creating house")
+                    .message(String.format("Error occurred while creating house, message: %s", e.getMessage()))
                     .build();
         }
     }
@@ -158,9 +155,9 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
 
     public ResponseDto<Page<HouseDto>> getHousesWithParams(Map<String, String> params, Types types, Status status) {
         int size = 10, page = 0;
-//        if (params.containsKey("size")){
-//            size = Integer.parseInt(params.get("size"));
-//        }
+        if (params.containsKey("size")){
+            size = Integer.parseInt(params.get("size"));
+        }
         if (params.containsKey("page")) {
             page = Integer.parseInt(params.get("page"));
         }
@@ -168,7 +165,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
                 .success(true)
                 .message("OK")
                 .content(
-                        this.houseRepository.getAllHouseWithMoreParams(
+                        this.houseRepository.getHousesWithMoreParams(
                                 params.get("houseId") == null ? null : Integer.parseInt(params.get("houseId")),
                                 params.get("nameOfBuilding"),
                                 params.get("numberOfHouse") == null ? null : Integer.parseInt(params.get("numberOfHouse")),

@@ -25,6 +25,9 @@ public class Sale {
     private Long price;
     private boolean available;
 
+//    @Column(name = "house_id")
+//    private Integer houseId;
+
     @OneToOne(mappedBy = "sale", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private House house;
 

@@ -19,6 +19,7 @@ public abstract class AddressMapper {
     @Mapping(target = "house", ignore = true)
     public abstract Address toEntity(AddressDto dto);
 
+    @Mapping(target = "house", ignore = true)
     public abstract AddressDto toDto(Address address);
 
 

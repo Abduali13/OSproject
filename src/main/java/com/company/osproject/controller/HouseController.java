@@ -150,7 +150,7 @@ public class HouseController implements SimpleRequestCrud<HouseDto, Integer> {
                     )
             }
     )
-    public ResponseEntity<ResponseDto<HouseDto>> updateEntity(Integer entityId,@RequestBody HouseDto dto) {
+    public ResponseEntity<ResponseDto<HouseDto>> updateEntity(Integer entityId, @RequestBody HouseDto dto) {
         return convertStatusByData(this.houseService.updateEntity(entityId, dto));
     }
 
@@ -233,7 +233,7 @@ public class HouseController implements SimpleRequestCrud<HouseDto, Integer> {
             }
     )
     @GetMapping(value = "/get-all-apartments")
-    public ResponseEntity<ResponseDto<HouseDto>> getAllApartments(){
+    public ResponseEntity<ResponseDto<HouseDto>> getAllApartments() {
         return convertStatusByData(this.houseService.getAllApartments());
     }
 
@@ -274,7 +274,7 @@ public class HouseController implements SimpleRequestCrud<HouseDto, Integer> {
             }
     )
     @GetMapping(value = "/get-all-flats")
-    public ResponseEntity<ResponseDto<HouseDto>> getAllFlats(){
+    public ResponseEntity<ResponseDto<HouseDto>> getAllFlats() {
         return convertStatusByData(this.houseService.getAllFlats());
     }
 
@@ -316,7 +316,7 @@ public class HouseController implements SimpleRequestCrud<HouseDto, Integer> {
             }
     )
     @GetMapping(value = "/get-all-houses")
-    public ResponseEntity<ResponseDto<HouseDto>> getAllHouses(){
+    public ResponseEntity<ResponseDto<HouseDto>> getAllHouses() {
         return convertStatusByData(this.houseService.getAllHouses());
     }
 
@@ -358,7 +358,10 @@ public class HouseController implements SimpleRequestCrud<HouseDto, Integer> {
             }
     )
     @GetMapping(value = "/get-house-with-params")
-    public ResponseEntity<ResponseDto<Page<HouseDto>>> getHousesWithParams(@RequestParam Map<String, String> params, Types types, Status status){
-        return convertStatusByData(this.houseService.getHousesWithParams(params, types, status));
+    public ResponseDto<Page<HouseDto>> getHousesWithParams(
+            @RequestParam Map<String, String> params,
+            @RequestParam Types types,
+            @RequestParam Status status) {
+        return this.houseService.getHousesWithParams(params, types, status);
     }
 }

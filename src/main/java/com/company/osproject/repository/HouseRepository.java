@@ -1,13 +1,9 @@
 package com.company.osproject.repository;
 
-import com.company.osproject.entity.Address;
 import com.company.osproject.entity.House;
-import com.company.osproject.entity.Rent;
-import com.company.osproject.entity.Sale;
 import com.company.osproject.entity.enums.Status;
 import com.company.osproject.entity.enums.Types;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +11,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -74,7 +69,7 @@ public interface HouseRepository extends JpaRepository<House, Integer> {
                     " and h.description = coalesce(:description, h.description) " +
                     " and h.types = coalesce(:types, h.types) " +
                     " and h.status = coalesce(:status, h.status) ")
-    Page<House> getAllHouseWithMoreParams(
+    Page<House> getHousesWithMoreParams(
             @Param(value = "houseId") Integer houseId,
             @Param(value = "nameOfBuilding") String nameOfBuilding,
             @Param(value = "numberOfHouse") Integer numberOfHouse,

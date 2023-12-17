@@ -25,7 +25,10 @@ public class Address {
     private String district;
     private String city;
 
-    @OneToOne(mappedBy = "address")
+    @Column(name = "house_id")
+    private Integer houseId;
+
+    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private House house;
 
     private LocalDateTime createdAt;

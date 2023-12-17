@@ -22,6 +22,9 @@ public class Rent {
     private LocalDate endDate;
     private boolean active;
 
+//    @Column(name = "house_id")
+//    private Integer houseId;
+
     @OneToOne(mappedBy = "rent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private House house;
 
