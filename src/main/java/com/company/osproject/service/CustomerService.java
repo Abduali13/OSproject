@@ -50,7 +50,7 @@ public class CustomerService implements SimpleCrud<CustomerDto, Integer> {
                 .map(customer -> ResponseDto.<CustomerDto>builder()
                         .success(true)
                         .message("OK")
-                        .content(this.customerMapper.toDto(customer))
+                        .content(this.customerMapper.toDtoWithHouse(customer))
                         .build())
                 .orElse(ResponseDto.<CustomerDto>builder()
                         .code(-1)
