@@ -42,8 +42,8 @@ public class House {
     @Enumerated(EnumType.STRING)
     public Status status;
 
-//    @Column(name = "address_id")
-//    private Integer addressId;
+    @Column(name = "address_id")
+    private Integer addressId;
 //
 //    @Column(name = "sale_id")
 //    private Integer saleId;
@@ -54,12 +54,17 @@ public class House {
 //    @Column(name = "image_id")
 //    private Integer imageId;
 //
-//    @Column(name = "customer_id")
-//    private Integer customerId;
+    @Column(name = "customer_id")
+    private Integer customerId;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", insertable = false, updatable = false)
     private Address address;
+
+//    public void setAddress(Address address) {
+//        this.address = address;
+//        address.setHouse(this);
+//    }
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sale_id", insertable = false, updatable = false)
@@ -69,7 +74,7 @@ public class House {
     @JoinColumn(name = "rent_id", insertable = false, updatable = false)
     private Rent rent;
 
-    @OneToMany(mappedBy = "house",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "house",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Image> images;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

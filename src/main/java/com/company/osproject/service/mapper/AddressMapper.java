@@ -1,16 +1,22 @@
 package com.company.osproject.service.mapper;
 
 import com.company.osproject.dto.AddressDto;
+import com.company.osproject.dto.HouseDto;
 import com.company.osproject.entity.Address;
-import jakarta.validation.constraints.Null;
+import com.company.osproject.entity.House;
 import org.mapstruct.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-@Mapper(componentModel = "spring", imports = {Collection.class, LocalDateTime.class})
+@Mapper(componentModel = "spring", imports = {Collection.class, LocalDateTime.class}, uses = {HouseMapper.class})
 public abstract class AddressMapper {
 
+    @Lazy
+    @Autowired
+    private HouseMapper houseMapper;
 
     @Mapping(target = "addressId", ignore = true)
     @Mapping(target = "createdAt", expression = "java(LocalDateTime.now())")
@@ -22,6 +28,8 @@ public abstract class AddressMapper {
     @Mapping(target = "house", ignore = true)
     public abstract AddressDto toDto(Address address);
 
+    @Mapping(target = "house", expression = "java(this.houseMapper.toDto(address.getHouse()))")
+    public abstract AddressDto toDtoWithHouse(Address address);
 
     @Mapping(target = "addressId", ignore = true)
     @Mapping(target = "createdAt", ignore = true)

@@ -50,7 +50,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
                 .map(house -> ResponseDto.<HouseDto>builder()
                         .success(true)
                         .message("OK")
-                        .content(this.houseMapper.toDto(house))
+                        .content(this.houseMapper.toDtoWithAddress(house))
                         .build())
                 .orElse(ResponseDto.<HouseDto>builder()
                         .code(-1)

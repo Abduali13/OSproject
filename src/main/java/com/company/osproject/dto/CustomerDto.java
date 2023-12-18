@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerDto {
 
     private Integer customerId;
@@ -45,6 +45,8 @@ public class CustomerDto {
 
     @Enumerated(EnumType.STRING)
     private CustomerRoles customerRoles;
+
+    private Integer houseId;
 
     private List<HouseDto> houses;
 

@@ -58,6 +58,8 @@ public class HouseDto {
 
     private String description;
 
+    private Integer addressId;
+
     @Enumerated(EnumType.STRING)
     private Types types;
 

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AddressDto {
 
     private Integer addressId;
@@ -31,6 +31,8 @@ public class AddressDto {
 
     @NotBlank(message = "City cannot be null or empty")
     private String city;
+
+    private Integer houseId;
 
     private HouseDto house;
 

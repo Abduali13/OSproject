@@ -33,10 +33,10 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private CustomerRoles customerRoles;
 
-//    @Column(name = "house_id")
-//    private Integer houseId;
+    @Column(name = "house_id")
+    private Integer houseId;
 
-    @ManyToMany(mappedBy = "customers", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "customers", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<House> houses;
 
     private LocalDateTime createdAt;
