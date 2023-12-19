@@ -54,8 +54,8 @@ public class House {
 //    @Column(name = "image_id")
 //    private Integer imageId;
 //
-    @Column(name = "customer_id")
-    private Integer customerId;
+//    @Column(name = "customer_id")
+//    private Integer customerId;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", insertable = false, updatable = false)
@@ -77,9 +77,9 @@ public class House {
     @OneToMany(mappedBy = "house",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Image> images;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
-    private List<Customer> customers;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+//    private List<Customer> customers; // todo: House class need to be mapped to Customer
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

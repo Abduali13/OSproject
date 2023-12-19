@@ -60,6 +60,8 @@ public class HouseDto {
 
     private Integer addressId;
 
+//    private Integer customerId;
+
     @Enumerated(EnumType.STRING)
     private Types types;
 
@@ -74,7 +76,7 @@ public class HouseDto {
 
     private List<ImageDto> images;
 
-    private List<CustomerDto> customers;
+//    private List<CustomerDto> customers;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

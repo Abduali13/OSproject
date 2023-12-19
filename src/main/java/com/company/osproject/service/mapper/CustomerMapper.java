@@ -2,12 +2,15 @@ package com.company.osproject.service.mapper;
 
 
 import com.company.osproject.dto.CustomerDto;
+import com.company.osproject.dto.HouseDto;
 import com.company.osproject.entity.Customer;
+import com.company.osproject.entity.House;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", imports = {Collectors.class, LocalDateTime.class})
@@ -29,9 +32,13 @@ public abstract class CustomerMapper {
     @Mapping(target = "houses", ignore = true)
     public abstract CustomerDto toDto(Customer customer);
 
-    @Mapping(target = "houses", expression = "java(customer.getHouses().stream().map(this.houseMapper::toDto).collect(Collectors.toList()))")
+    @Mapping(target = "houses", expression = "java(customer.getHouses().stream().map(this.houseMapper::toDtoWithAddress).collect(Collectors.toList()))")
     public abstract CustomerDto toDtoWithHouse(Customer customer);
 
+
+    void simple(Customer customer){
+       customer.getHouses().stream().map(this.houseMapper::toDtoWithAddress).collect(Collectors.toList());
+    }
 
     @Mapping(target = "customerId", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
