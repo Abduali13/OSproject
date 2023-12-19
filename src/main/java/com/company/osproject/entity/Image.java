@@ -23,8 +23,8 @@ public class Image {
     private String path;
     private String contentType;
 
-//    @Column(name = "house_id")
-//    private Integer houseId;
+    @Column(name = "house_id")
+    private Integer houseId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "house_id", insertable = false, updatable = false)

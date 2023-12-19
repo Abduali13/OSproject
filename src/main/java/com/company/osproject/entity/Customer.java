@@ -36,10 +36,8 @@ public class Customer {
     @Column(name = "house_id")
     private Integer houseId;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "customers_house",
-            joinColumns = {@JoinColumn(name = "customer_id")},
-            inverseJoinColumns = {@JoinColumn(name = "house_id")})
+
+    @OneToMany(mappedBy = "customers",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<House> houses; // todo: Customer class need to be mapped to House
 
     private LocalDateTime createdAt;

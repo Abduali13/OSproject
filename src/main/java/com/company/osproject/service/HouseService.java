@@ -2,6 +2,7 @@ package com.company.osproject.service;
 
 import com.company.osproject.dto.HouseDto;
 import com.company.osproject.dto.ResponseDto;
+import com.company.osproject.entity.House;
 import com.company.osproject.entity.enums.Status;
 import com.company.osproject.entity.enums.Types;
 import com.company.osproject.repository.HouseRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -185,5 +187,9 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
                         ).map(this.houseMapper::toDto)
                 )
                 .build();
+    }
+
+    public House getHouse(Integer houseId) {
+        return this.houseRepository.findByHouseId(houseId);
     }
 }

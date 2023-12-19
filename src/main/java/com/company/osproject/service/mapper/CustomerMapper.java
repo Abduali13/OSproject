@@ -22,23 +22,19 @@ public abstract class CustomerMapper {
     protected HouseMapper houseMapper;
 
     @Mapping(target = "customerId", ignore = true)
-    @Mapping(target = "createdAt", expression = "java(LocalDateTime.now())")
+    @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "deletedAt", ignore = true)
-    @Mapping(target = "houses", ignore = true)
     @Mapping(target = "active", expression = "java(true)")
     public abstract Customer toEntity(CustomerDto dto);
 
     @Mapping(target = "houses", ignore = true)
     public abstract CustomerDto toDto(Customer customer);
 
-    @Mapping(target = "houses", expression = "java(customer.getHouses().stream().map(this.houseMapper::toDtoWithAddress).collect(Collectors.toList()))")
+    @Mapping(target = "houses", expression = "java(customer.getHouses().stream().map(this.houseMapper::toDto).collect(Collectors.toList()))")
     public abstract CustomerDto toDtoWithHouse(Customer customer);
 
 
-    void simple(Customer customer){
-       customer.getHouses().stream().map(this.houseMapper::toDtoWithAddress).collect(Collectors.toList());
-    }
 
     @Mapping(target = "customerId", ignore = true)
     @Mapping(target = "createdAt", ignore = true)

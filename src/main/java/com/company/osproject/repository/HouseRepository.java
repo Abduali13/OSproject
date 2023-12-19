@@ -17,6 +17,8 @@ import java.util.Optional;
 public interface HouseRepository extends JpaRepository<House, Integer> {
 
 
+    House findByHouseId(Integer houseId);
+
     Optional<House> findAllByTypes(Types types);
 
     Optional<House> findAllByDeletedAtIsNull();

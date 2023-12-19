@@ -3,9 +3,12 @@ package com.company.osproject.service;
 
 import com.company.osproject.dto.CustomerDto;
 import com.company.osproject.dto.ResponseDto;
+import com.company.osproject.entity.House;
 import com.company.osproject.entity.enums.CustomerRoles;
 import com.company.osproject.repository.CustomerRepository;
+import com.company.osproject.repository.HouseRepository;
 import com.company.osproject.service.mapper.CustomerMapper;
+import com.company.osproject.service.mapper.HouseMapper;
 import com.company.osproject.util.SimpleCrud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,7 +16,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

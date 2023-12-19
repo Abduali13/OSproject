@@ -23,6 +23,7 @@ public class SaleDto {
 
     private boolean available;
 
+    private Integer houseId;
     private HouseDto house;
 
 

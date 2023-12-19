@@ -44,27 +44,23 @@ public class House {
 
     @Column(name = "address_id")
     private Integer addressId;
-//
-//    @Column(name = "sale_id")
-//    private Integer saleId;
-//
-//    @Column(name = "rent_id")
-//    private Integer rentId;
-//
-//    @Column(name = "image_id")
-//    private Integer imageId;
-//
-//    @Column(name = "customer_id")
-//    private Integer customerId;
+
+    @Column(name = "sale_id")
+    private Integer saleId;
+
+    @Column(name = "rent_id")
+    private Integer rentId;
+
+    @Column(name = "image_id")
+    private Integer imageId;
+
+    @Column(name = "customer_id")
+    private Integer customerId;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", insertable = false, updatable = false)
     private Address address;
 
-//    public void setAddress(Address address) {
-//        this.address = address;
-//        address.setHouse(this);
-//    }
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sale_id", insertable = false, updatable = false)
@@ -77,9 +73,9 @@ public class House {
     @OneToMany(mappedBy = "house",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Image> images;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
-//    private List<Customer> customers; // todo: House class need to be mapped to Customer
+    @ManyToOne
+    @JoinColumn(name = "customer_id",nullable = false, insertable = false, updatable = false)
+    private Customer customers; // todo: House class need to be mapped to Customer
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
