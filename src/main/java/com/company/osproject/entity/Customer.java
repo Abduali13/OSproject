@@ -37,7 +37,7 @@ public class Customer {
     private Integer houseId;
 
     @OneToMany(mappedBy = "customers",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<House> houses; // todo: Customer class need to be mapped to House
+    private List<House> houses;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

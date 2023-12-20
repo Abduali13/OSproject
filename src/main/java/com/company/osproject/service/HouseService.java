@@ -32,13 +32,13 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
 
     @Override
     public ResponseDto<HouseDto> createEntity(HouseDto dto) {
-//        List<ErrorDto> errorList = this.houseValidation.houseValid(dto);
-//        if (!errorList.isEmpty()){
-//            return ResponseDto.<HouseDto>builder()
-//                    .code(-3)
-//                    .message("Validation error")
-//                    .build();
-//        }
+        List<ErrorDto> errorList = this.houseValidation.houseValid(dto);
+        if (!errorList.isEmpty()){
+            return ResponseDto.<HouseDto>builder()
+                    .code(-3)
+                    .message("Validation error")
+                    .build();
+        }
 
         try {
             return ResponseDto.<HouseDto>builder()
@@ -160,13 +160,6 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
 
     }
 
-    public ResponseDto<HouseDto> getAllHousesForRent() {
-        return null;
-    }
-
-    public ResponseDto<HouseDto> getAllHousesForSale() {
-        return null;
-    }
 
     public ResponseDto<Page<HouseDto>> getHousesWithParams(Map<String, String> params, Types types, Status status) {
         int size = 10, page = 0;

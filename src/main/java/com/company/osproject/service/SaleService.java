@@ -18,7 +18,11 @@ public class SaleService {
 
     @Autowired
     private final HouseService houseService;
+
+    @Autowired
     private final SaleRepository saleRepository;
+
+    @Autowired
     private final SaleMapper saleMapper;
 
     public ResponseDto<SaleDto> saleApproval(Integer houseId) {

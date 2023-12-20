@@ -21,7 +21,11 @@ public class RentService {
 
     @Autowired
     private HouseService houseService;
+
+    @Autowired
     private RentRepository rentRepository;
+
+    @Autowired
     private RentMapper rentMapper;
 
     public ResponseDto<RentDto> rentApproval(Integer houseId){
