@@ -49,7 +49,7 @@ public class AddressService implements SimpleCrud<AddressDto, Integer> {
                 .map(address -> ResponseDto.<AddressDto>builder()
                         .success(true)
                         .message("OK")
-                        .content(this.addressMapper.toDtoWithHouse(address))
+                        .content(this.addressMapper.toDto(address))
                         .build())
                 .orElse(ResponseDto.<AddressDto>builder()
                         .code(-1)

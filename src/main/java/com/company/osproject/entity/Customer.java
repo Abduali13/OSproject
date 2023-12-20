@@ -36,7 +36,6 @@ public class Customer {
     @Column(name = "house_id")
     private Integer houseId;
 
-
     @OneToMany(mappedBy = "customers",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<House> houses; // todo: Customer class need to be mapped to House
 

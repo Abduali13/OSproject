@@ -55,11 +55,12 @@ public class CustomerService implements SimpleCrud<CustomerDto, Integer> {
                 .map(customer -> ResponseDto.<CustomerDto>builder()
                         .success(true)
                         .message("OK")
-                        .content(this.customerMapper.toDtoWithHouse(customer))
+                        .content(this.customerMapper.toDtoWithParams(customer))
                         .build())
                 .orElse(ResponseDto.<CustomerDto>builder()
                         .code(-1)
-                        .message(String.format("Customer with this %d is not found", entityId)).build());
+                        .message(String.format("Customer with this %d is not found", entityId))
+                        .build());
     }
 
     @Override

@@ -26,5 +26,4 @@ public class SaleDto {
     private Integer houseId;
     private HouseDto house;
 
-
 }

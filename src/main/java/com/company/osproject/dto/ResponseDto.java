@@ -2,6 +2,8 @@ package com.company.osproject.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -13,4 +15,5 @@ public class ResponseDto <T> {
     private int code;
     private String message;
     private T content;
+    private List<ErrorDto> errorList;
 }

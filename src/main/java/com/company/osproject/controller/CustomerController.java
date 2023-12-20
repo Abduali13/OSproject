@@ -9,18 +9,15 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 import java.util.Map;
 
 import static com.company.osproject.constants.SwaggerConstants.*;
-import static com.company.osproject.constants.SwaggerConstants.EXAMPLE_HOUSE_INTERNAL_SERVER_ERROR;
 import static com.company.osproject.dto.SimpleResponseDto.convertStatusByData;
 
 @RestController

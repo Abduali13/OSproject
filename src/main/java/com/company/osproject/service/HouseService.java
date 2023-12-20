@@ -1,5 +1,6 @@
 package com.company.osproject.service;
 
+import com.company.osproject.dto.ErrorDto;
 import com.company.osproject.dto.HouseDto;
 import com.company.osproject.dto.ResponseDto;
 import com.company.osproject.entity.House;
@@ -7,6 +8,7 @@ import com.company.osproject.entity.enums.Status;
 import com.company.osproject.entity.enums.Types;
 import com.company.osproject.repository.HouseRepository;
 import com.company.osproject.service.mapper.HouseMapper;
+import com.company.osproject.service.validation.HouseValidation;
 import com.company.osproject.util.SimpleCrud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,10 +27,19 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
 
     private final HouseRepository houseRepository;
     private final HouseMapper houseMapper;
+    private final HouseValidation houseValidation;
 
 
     @Override
     public ResponseDto<HouseDto> createEntity(HouseDto dto) {
+//        List<ErrorDto> errorList = this.houseValidation.houseValid(dto);
+//        if (!errorList.isEmpty()){
+//            return ResponseDto.<HouseDto>builder()
+//                    .code(-3)
+//                    .message("Validation error")
+//                    .build();
+//        }
+
         try {
             return ResponseDto.<HouseDto>builder()
                     .success(true)
@@ -52,7 +65,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
                 .map(house -> ResponseDto.<HouseDto>builder()
                         .success(true)
                         .message("OK")
-                        .content(this.houseMapper.toDtoWithAddress(house))
+                        .content(this.houseMapper.toDtoWithParams(house))
                         .build())
                 .orElse(ResponseDto.<HouseDto>builder()
                         .code(-1)

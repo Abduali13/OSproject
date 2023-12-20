@@ -61,7 +61,6 @@ public class House {
     @JoinColumn(name = "address_id", insertable = false, updatable = false)
     private Address address;
 
-
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sale_id", insertable = false, updatable = false)
     private Sale sale;
@@ -73,8 +72,8 @@ public class House {
     @OneToMany(mappedBy = "house",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Image> images;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id",nullable = false, insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private Customer customers; // todo: House class need to be mapped to Customer
 
     private LocalDateTime createdAt;
