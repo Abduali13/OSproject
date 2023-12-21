@@ -3,11 +3,17 @@ package com.company.osproject.service.mapper;
 import com.company.osproject.dto.SaleDto;
 import com.company.osproject.entity.House;
 import com.company.osproject.entity.Sale;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class SaleMapper {
 
+    @Lazy
+    @Autowired
     private HouseMapper houseMapper;
 
     public Sale toEntity(SaleDto dto){

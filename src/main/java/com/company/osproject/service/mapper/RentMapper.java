@@ -2,11 +2,17 @@ package com.company.osproject.service.mapper;
 
 import com.company.osproject.dto.RentDto;
 import com.company.osproject.entity.Rent;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class RentMapper {
 
+    @Lazy
+    @Autowired
     private HouseMapper houseMapper;
     public Rent toEntity(RentDto dto){
         return Rent.builder()

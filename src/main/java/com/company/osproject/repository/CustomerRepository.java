@@ -17,8 +17,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     Optional<Customer> findCustomerByCustomerIdAndDeletedAtIsNull(Integer customerId);
 
-//    Optional<Customer> findCustomerByCustomerIdAndDeletedAtIsNullAndActiveIsTrue(Integer customerId);
-
     @Query(
             value = "select c from Customer as c where c.customerId = coalesce(:customerId, c.customerId) " +
                     " and c.firstname = coalesce(:firstname, c.firstname) " +

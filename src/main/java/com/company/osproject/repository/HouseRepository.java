@@ -25,18 +25,6 @@ public interface HouseRepository extends JpaRepository<House, Integer> {
 
     Optional<House> findAllByHouseIdAndDeletedAtIsNull(Integer entityId);
 
-    @Query(
-            value = "select h from House as h where h.houseId=:id and h.deletedAt is null and :status like '%RENT' ",
-            countQuery = "select count(h.houseId) from House as h where h.houseId=:id and h.deletedAt is null and :status like '%RENT' "
-    )
-    List<House> findHouseByHouseIdAndDeletedAtIsNullAndStatusIsForRent(@Param("id") Integer houseId, @Param("status") Status status);
-
-    @Query(
-            value = "select h from House as h where h.houseId=:id and h.deletedAt is null and :status like '%SALE' ",
-            countQuery = "select count(h.houseId) from House as h where h.houseId=:id and h.deletedAt is null and :status like '%SALE' "
-    )
-    List<House> findHouseByHouseIdAndDeletedAtIsNullAndStatusIsForSale(@Param("id") Integer houseId, @Param("status") Status status);
-
 
     @Query(
             value = "select h from House as h where h.houseId = coalesce(:houseId, h.houseId) " +
@@ -93,3 +81,23 @@ public interface HouseRepository extends JpaRepository<House, Integer> {
 
 
 }
+
+
+
+
+
+
+
+
+//@Query(
+//        value = "select h from House as h where h.houseId=:id and h.deletedAt is null and :status like '%RENT' ",
+//        countQuery = "select count(h.houseId) from House as h where h.houseId=:id and h.deletedAt is null and :status like '%RENT' "
+//)
+//List<House> findHouseByHouseIdAndDeletedAtIsNullAndStatusIsForRent(@Param("id") Integer houseId, @Param("status") Status status);
+//
+//@Query(
+//        value = "select h from House as h where h.houseId=:id and h.deletedAt is null and :status like '%SALE' ",
+//        countQuery = "select count(h.houseId) from House as h where h.houseId=:id and h.deletedAt is null and :status like '%SALE' "
+//)
+//List<House> findHouseByHouseIdAndDeletedAtIsNullAndStatusIsForSale(@Param("id") Integer houseId, @Param("status") Status status);
+//

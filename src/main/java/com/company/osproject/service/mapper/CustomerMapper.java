@@ -3,13 +3,20 @@ package com.company.osproject.service.mapper;
 
 import com.company.osproject.dto.CustomerDto;
 import com.company.osproject.entity.Customer;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class CustomerMapper{
-    protected HouseMapper houseMapper;
+
+    @Lazy
+    @Autowired
+    private HouseMapper houseMapper;
 
 
     public Customer toEntity(CustomerDto dto){
@@ -60,7 +67,34 @@ public class CustomerMapper{
     }
 
     public Customer updateCustomer(Customer customer, CustomerDto dto){
-        return null;
+        if (dto.getFirstname() != null ){
+            customer.setFirstname(dto.getFirstname());
+        }
+        if (dto.getLastname() != null ){
+            customer.setLastname(dto.getLastname());
+        }
+        if (dto.getEmail() != null ){
+            customer.setEmail(dto.getEmail());
+        }
+        if (dto.getPassword() != null ){
+            customer.setPassword(dto.getPassword());
+        }
+        if (dto.getPhoneNumber() != null ){
+            customer.setPhoneNumber(dto.getPhoneNumber());
+        }
+        if (dto.getAge() != null ){
+            customer.setAge(dto.getAge());
+        }
+        if (dto.getUsername() != null ){
+            customer.setUsername(dto.getUsername());
+        }
+        if (dto.getHouseId() != null ){
+            customer.setHouseId(dto.getHouseId());
+        }
+        if (dto.getHouseId() != null ){
+            customer.setHouseId(dto.getHouseId());
+        }
+        return customer;
     }
 }
 

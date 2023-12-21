@@ -104,64 +104,52 @@ public class HouseMapper{
     }
 
     public House updateHouse(House house, HouseDto dto){
-        return null;
+        if (dto.getNameOfBuilding() != null) {
+            house.setNameOfBuilding(dto.getNameOfBuilding());
+        }
+        if (dto.getNumberOfHouse() != null) {
+            house.setNumberOfHouse(dto.getNumberOfHouse());
+        }
+        if (dto.getNumberOfRooms() != null) {
+            house.setNumberOfRooms(dto.getNumberOfRooms());
+        }
+        if (dto.getNumberOfFloor() != null) {
+            house.setNameOfBuilding(dto.getNameOfBuilding());
+        }
+        if (dto.getNumberOfFloor() != null) {
+            house.setNumberOfFloor(dto.getNumberOfFloor());
+        }
+        if (dto.getNumberOfBedrooms() != null) {
+            house.setNumberOfBedrooms(dto.getNumberOfBedrooms());
+        }
+        if (dto.getNumberOfKitchens() != null) {
+            house.setNumberOfKitchens(dto.getNumberOfKitchens());
+        }
+        if (dto.getNumberOfBathrooms() != null) {
+            house.setNumberOfBathrooms(dto.getNumberOfBathrooms());
+        }
+        if (dto.getNumberOfGarages() != null) {
+            house.setNumberOfGarages(dto.getNumberOfGarages());
+        }
+        if (dto.getNumberOfParkingSlots() != null) {
+            house.setNumberOfParkingSlots(dto.getNumberOfParkingSlots());
+        }
+        if (dto.getPrice() != null) {
+            house.setPrice(dto.getPrice());
+        }
+        if (dto.getAdditionalInfo() != null) {
+            house.setAdditionalInfo(dto.getAdditionalInfo());
+        }
+        if (dto.getDescription() != null) {
+            house.setDescription(dto.getDescription());
+        }
+        if (dto.getTypes() != null) {
+            house.setTypes(dto.getTypes());
+        }
+        if (dto.getStatus() != null) {
+            house.setStatus(dto.getStatus());
+        }
+        return house;
     }
 
 }
-
-
-
-//package com.company.osproject.service.mapper;
-//
-//import com.company.osproject.dto.CustomerDto;
-//import com.company.osproject.dto.HouseDto;
-//import com.company.osproject.entity.Customer;
-//import com.company.osproject.entity.House;
-//import org.mapstruct.*;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Lazy;
-//
-//import java.time.LocalDateTime;
-//import java.util.stream.Collectors;
-//
-//@Mapper(componentModel = "spring", imports = {Collectors.class, LocalDateTime.class})
-//public abstract class HouseMapper {
-//
-//    @Lazy
-//    @Autowired
-//    protected AddressMapper addressMapper;
-//
-//    @Lazy
-//    @Autowired
-//    protected CustomerMapper customerMapper;
-//
-//
-//    @Mapping(target = "houseId", ignore = true)
-//    @Mapping(target = "createdAt", ignore = true)
-//    @Mapping(target = "updatedAt", ignore = true)
-//    @Mapping(target = "deletedAt", ignore = true)
-//    public abstract House toEntity(HouseDto dto);
-//
-//
-//    @Mapping(target = "address", ignore = true)
-//    @Mapping(target = "customers", ignore = true)
-//    @Mapping(target = "sale", ignore = true)
-//    @Mapping(target = "rent", ignore = true)
-//    @Mapping(target = "images", ignore = true)
-//    public abstract HouseDto toDto(House house);
-//
-//
-//    @Mapping(target = "address", expression = "java(this.addressMapper.toDto(house.getAddress()))")
-//    @Mapping(target = "customers", expression = "java(this.customerMapper.toDto(house.getCustomers()))")
-//    @Mapping(target = "sale", ignore = true)
-//    @Mapping(target = "rent", ignore = true)
-//    @Mapping(target = "images", ignore = true)
-//    public abstract HouseDto toDtoWithAddress(House house);
-//
-//    @Mapping(target = "houseId", ignore = true)
-//    @Mapping(target = "createdAt", ignore = true)
-//    @Mapping(target = "deletedAt", ignore = true)
-//    @Mapping(target = "updatedAt", expression = "java(LocalDateTime.now())")
-//    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, resultType = House.class)
-//    public abstract House updateHouse(@MappingTarget House house, HouseDto dto);
-//}
