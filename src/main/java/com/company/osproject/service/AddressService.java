@@ -3,12 +3,10 @@ package com.company.osproject.service;
 
 import com.company.osproject.dto.AddressDto;
 import com.company.osproject.dto.ResponseDto;
-import com.company.osproject.entity.Address;
 import com.company.osproject.repository.AddressRepository;
 import com.company.osproject.service.mapper.AddressMapper;
 import com.company.osproject.util.SimpleCrud;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -45,7 +43,20 @@ public class AddressService implements SimpleCrud<AddressDto, Integer> {
 
     @Override
     public ResponseDto<AddressDto> getEntity(Integer entityId) {
-        return this.addressRepository.findAddressByAddressIdAndDeletedAtIsNull(entityId)
+        return this.addressRepository.findAllByAddressIdAndDeletedAtIsNull(entityId)
+                .map(address -> ResponseDto.<AddressDto>builder()
+                        .success(true)
+                        .message("OK")
+                        .content(this.addressMapper.toDto(address))
+                        .build())
+                .orElse(ResponseDto.<AddressDto>builder()
+                        .code(-1)
+                        .message(String.format("Address with this %d is not found", entityId)).build());
+    }
+
+
+    public ResponseDto<AddressDto> get(Integer entityId) {
+        return this.addressRepository.findAllByAddressIdAndDeletedAtIsNull(entityId)
                 .map(address -> ResponseDto.<AddressDto>builder()
                         .success(true)
                         .message("OK")
@@ -58,7 +69,7 @@ public class AddressService implements SimpleCrud<AddressDto, Integer> {
 
     @Override
     public ResponseDto<AddressDto> updateEntity(Integer entityId, AddressDto dto) {
-        return this.addressRepository.findAddressByAddressIdAndDeletedAtIsNull(entityId)
+        return this.addressRepository.findAllByAddressIdAndDeletedAtIsNull(entityId)
                 .map(address ->
                      ResponseDto.<AddressDto>builder()
                             .success(true)
@@ -74,7 +85,7 @@ public class AddressService implements SimpleCrud<AddressDto, Integer> {
 
     @Override
     public ResponseDto<AddressDto> deleteEntity(Integer entityId) {
-        return this.addressRepository.findAddressByAddressIdAndDeletedAtIsNull(entityId)
+        return this.addressRepository.findAllByAddressIdAndDeletedAtIsNull(entityId)
                 .map(address -> {
                     address.setDeletedAt(LocalDateTime.now());
                     return ResponseDto.<AddressDto>builder()

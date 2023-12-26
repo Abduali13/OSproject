@@ -16,10 +16,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -41,13 +39,15 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
         }
 
         try {
+            House entity = this.houseMapper.toEntity(dto);
+            entity.setCreatedAt(LocalDateTime.now());
             return ResponseDto.<HouseDto>builder()
                     .success(true)
                     .message("OK")
                     .content(
                             this.houseMapper.toDto(
                                     this.houseRepository.save(
-                                            this.houseMapper.toEntity(dto))
+                                           entity)
                             )
                     )
                     .build();
@@ -66,6 +66,19 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
                         .success(true)
                         .message("OK")
                         .content(this.houseMapper.toDtoWithParams(house))
+                        .build())
+                .orElse(ResponseDto.<HouseDto>builder()
+                        .code(-1)
+                        .message(String.format("House with this %d cannot be found", entityId))
+                        .build());
+    }
+
+    public ResponseDto<HouseDto> get(Integer entityId) {
+        return this.houseRepository.findAllByHouseIdAndDeletedAtIsNull(entityId)
+                .map(house -> ResponseDto.<HouseDto>builder()
+                        .success(true)
+                        .message("OK")
+                        .content(this.houseMapper.toDto(house))
                         .build())
                 .orElse(ResponseDto.<HouseDto>builder()
                         .code(-1)
@@ -163,7 +176,7 @@ public class HouseService implements SimpleCrud<HouseDto, Integer> {
 
     public ResponseDto<Page<HouseDto>> getHousesWithParams(Map<String, String> params, Types types, Status status) {
         int size = 10, page = 0;
-        if (params.containsKey("size")){
+        if (params.containsKey("size")) {
             size = Integer.parseInt(params.get("size"));
         }
         if (params.containsKey("page")) {

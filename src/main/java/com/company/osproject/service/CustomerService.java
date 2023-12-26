@@ -2,6 +2,7 @@ package com.company.osproject.service;
 
 
 import com.company.osproject.dto.CustomerDto;
+import com.company.osproject.dto.ErrorDto;
 import com.company.osproject.dto.ResponseDto;
 import com.company.osproject.entity.House;
 import com.company.osproject.entity.enums.CustomerRoles;
@@ -9,6 +10,7 @@ import com.company.osproject.repository.CustomerRepository;
 import com.company.osproject.repository.HouseRepository;
 import com.company.osproject.service.mapper.CustomerMapper;
 import com.company.osproject.service.mapper.HouseMapper;
+import com.company.osproject.service.validation.CustomerValidation;
 import com.company.osproject.util.SimpleCrud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,10 +28,18 @@ public class CustomerService implements SimpleCrud<CustomerDto, Integer> {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final CustomerValidation customerValidation;
 
 
     @Override
     public ResponseDto<CustomerDto> createEntity(CustomerDto dto) {
+        List<ErrorDto> errors = this.customerValidation.customerValid(dto);
+        if (!errors.isEmpty()){
+            return ResponseDto.<CustomerDto>builder()
+                    .code(-3)
+                    .message("Customer validation error")
+                    .build();
+        }
         try {
             return ResponseDto.<CustomerDto>builder()
                     .success(true)
@@ -56,6 +66,19 @@ public class CustomerService implements SimpleCrud<CustomerDto, Integer> {
                         .success(true)
                         .message("OK")
                         .content(this.customerMapper.toDtoWithParams(customer))
+                        .build())
+                .orElse(ResponseDto.<CustomerDto>builder()
+                        .code(-1)
+                        .message(String.format("Customer with this %d is not found", entityId))
+                        .build());
+    }
+
+    public ResponseDto<CustomerDto> get(Integer entityId) {
+        return this.customerRepository.findCustomerByCustomerIdAndDeletedAtIsNull(entityId)
+                .map(customer -> ResponseDto.<CustomerDto>builder()
+                        .success(true)
+                        .message("OK")
+                        .content(this.customerMapper.toDto(customer))
                         .build())
                 .orElse(ResponseDto.<CustomerDto>builder()
                         .code(-1)

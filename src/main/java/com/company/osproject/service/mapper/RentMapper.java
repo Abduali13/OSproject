@@ -30,7 +30,7 @@ public class RentMapper {
                 .startDate(rent.getStartDate())
                 .endDate(rent.getEndDate())
                 .price(rent.getPrice())
-                .house(this.houseMapper.toDto(rent.getHouse()))
+//                .house(this.houseMapper.toDto(rent.getHouse()))
                 .build();
     }
 }

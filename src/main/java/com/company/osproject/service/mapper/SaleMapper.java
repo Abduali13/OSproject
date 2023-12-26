@@ -31,7 +31,7 @@ public class SaleMapper {
                 .available(sale.isAvailable())
                 .price(sale.getPrice())
                 .soldDate(sale.getSoldDate())
-                .house(this.houseMapper.toDto(sale.getHouse()))
+//                .house(this.houseMapper.toDto(sale.getHouse()))
                 .build();
     }
 }

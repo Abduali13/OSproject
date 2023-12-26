@@ -25,10 +25,10 @@ public class Address {
     private String district;
     private String city;
 
-    @Column(name = "house_id")
+    @Column(name = "house_id", unique = true)
     private Integer houseId;
 
-    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private House house;
 
     private LocalDateTime createdAt;
